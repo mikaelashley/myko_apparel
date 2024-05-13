@@ -43,6 +43,16 @@
   border-radius: 0;
   margin-bottom: 15px;
 }
+
+.signup-form input{
+  width: 100%;
+  border: 1px solid #dddddd;
+  padding: 0.7em;
+  margin: 0.6em 0;
+  border-radius: 0;
+  margin-bottom: 15px;
+}
+
 .login-form{
   margin-bottom: 30px;
 } 
@@ -159,6 +169,11 @@
   font-style: normal;
 
 }
+
+.remember-checkbox, .remember-text, .forgot-password-link {
+    display: none;
+}
+
 .right a {
   position: relative;
   color: #b6b6b6;
@@ -371,15 +386,23 @@ form#login-form::before {
     font-size: 20px;
     margin-left: 20px;
 }
+
+.login-page .right .headit {
+    display: block;
+}
+.signup-page .right .headit {
+    display: none;
+}
     </style>
     <title>Document</title>
   </head>
   <body>
 
-<body id="myId"> 
+<body id="myId" class="login-page"> 
     <section class="register-account"> 
           <div class="signform">      
-            <div class="left"><a href="#" style="float:right;margin-right:35px;font-size: 0.9em;" class="bts-a">Don't have an account? Sign up!</a>
+            <div class="left">
+              <a href="#" style="float:right;margin-right:35px;font-size: 0.9em;" id="signup-link" class="bts-a">Don't have an account? Sign up!</a>
               <div class="bts">
                 <a href="#" class="fblogin social"><i class="fa fa-facebook"></i><span>Sign in with Facebook</span></a>
                  <a href="#" class="twlogin social"><i class="fa fa-twitter"></i><span>Sign in with Twitter</span></a>
@@ -396,8 +419,44 @@ form#login-form::before {
                       <input type="password" placeholder="Password"/>        
                       <input class="subbt" type="submit" value="Sign In" style="border:none;"/>   
                   </form>
-                  <input type="checkbox" id="remember" name="remember"><span style="color:#b6b6b6;font-size: 0.9em;"> Remember Me</span><a href="#">Forgot your password?</a>        
+                  <input type="checkbox" id="remember" name="remember" class="remember-checkbox">
+                  <span class="remember-text" style="color:#b6b6b6;font-size: 0.9em;"> Remember Me</span>
+                  <a href="#" class="forgot-password-link">Forgot your password?</a>
+        
                 </div>
+                <div class="signup-form" style="display: none;">
+
+                  <body id="myId" class="signup-page"> 
+                  <h4>Create Your Account</h4>
+                  <form class="signup-form" id="signup-form">
+                      <input type="text" placeholder="Full Name"/>
+                      <input type="email" placeholder="Email"/>
+                      <input type="password" placeholder="Password"/>
+                      <input type="password" placeholder="Confirm Password"/>
+                      <input type="submit" class="subbt" value="Sign Up" style="border:none"/>
+                  </form>
+              </div>
             </div>       
           </div>
     </section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          var signupForm = document.querySelector(".signup-form");
+          var loginForm = document.querySelector(".login-form");
+          var signupLink = document.getElementById("signup-link");
+          var loginHeading = document.querySelector(".login-page .right .headit");
+          var signupHeading = document.querySelector(".signup-page .right .headit");
+  
+          signupLink.addEventListener("click", function(event) {
+              event.preventDefault();
+              loginForm.style.display = "none";
+              signupForm.style.display = "block";
+              loginHeading.style.display = "none";
+              signupHeading.style.display = "block";
+          });
+      });
+  </script>
+
+    </body>
+  </html>
